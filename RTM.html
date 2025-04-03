@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airvue UI/UX Requirements Traceability Matrix</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1e40af;
+            --primary-light: #bfdbfe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --neutral-50: #f9fafb;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #e5e7eb;
+            --neutral-300: #d1d5db;
+            --neutral-400: #9ca3af;
+            --neutral-600: #4b5563;
+            --neutral-800: #1f2937;
+            --neutral-900: #111827;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: var(--neutral-50);
+            color: var(--neutral-900);
+            line-height: 1.5;
+            padding: 2rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-icon {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+        }
+        
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--neutral-600);
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .overview {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .overview h2 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .overview p {
+            margin-bottom: 1rem;
+        }
+        
+        .screen-list {
+            margin-bottom: 0.5rem;
+        }
+        
+        .screen-list li {
+            margin-left: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        
+        thead th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: var(--neutral-100);
+        }
+        
+        tbody tr:hover {
+            background-color: var(--primary-light);
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--neutral-200);
+            vertical-align: top;
+        }
+        
+        .id-col {
+            font-weight: 600;
+            color: var(--primary-dark);
+            width: 7%;
+        }
+        
+        .req-col {
+            width: 23%;
+        }
+        
+        .imp-col {
+            width: 20%;
+        }
+        
+        .status-col {
+            width: 15%;
+        }
+        
+        .comments-col {
+            width: 35%;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .implemented {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .partial {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .not-implemented {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        
+        .na {
+            background-color: var(--neutral-200);
+            color: var(--neutral-600);
+        }
+        
+        .summary {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary h2 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .summary h3 {
+            font-size: 1.125rem;
+            color: var(--primary-dark);
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        .gap-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .gap-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .priority-high {
+            border-left: 4px solid var(--danger);
+            padding-left: 0.75rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                </div>
+                <h1>Airvue UI/UX Traceability Matrix</h1>
+            </div>
+            <p class="subtitle">A comprehensive mapping of requirements to the current UI/UX implementation for the Airvue air quality monitoring platform.</p>
+        </div>
+
+        <div class="overview">
+            <h2>Overview</h2>
+            <p>This traceability matrix maps the requirements from the project phases document to the current UI/UX implementation as seen in the available screens. It serves as a guide for the UI/UX developer to understand what has been implemented and what still needs to be developed.</p>
+            <p><strong>Current Screens Available for Analysis:</strong></p>
+            <ul class="screen-list">
+                <li><strong>Main Dashboard</strong> - Air quality metrics, device AQIs, pollutant values, and calendar</li>
+                <li><strong>Add Device</strong> - Form for adding new monitoring devices</li>
+                <li><strong>Devices Listing</strong> - Table of all devices with status and actions</li>
+                <li><strong>Add User</strong> - Form for adding new users with permissions</li>
+                <li><strong>Users Listing</strong> - Table for user management (currently empty)</li>
+                <li><strong>Profile</strong> - User profile and password management</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Phase 1 – B2B (Web) Requirements</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-col">ID</th>
+                        <th class="req-col">Requirement Description</th>
+                        <th class="imp-col">UI/UX Implementation</th>
+                        <th class="status-col">Status</th>
+                        <th class="comments-col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="id-col">P1.1</td>
+                        <td>Architecture and Framework setup</td>
+                        <td>All screens</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Basic framework is in place with navigation, authentication, dashboard structure</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.2.1</td>
+                        <td>Client/User onboarding & Account management</td>
+                        <td>Add User, Users Listing</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>User creation form with fields for ID, name, email, role</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.2.2</td>
+                        <td>Multi-tiered subscription plans</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No UI elements for subscription plans (Basic, Pro, Enterprise)</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.2.3</td>
+                        <td>Payment gateway integration</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No payment UI elements</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.2.4</td>
+                        <td>Usage tracking and Alerting</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No usage metrics or alerts visible</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.3.1</td>
+                        <td>Device onboarding and management</td>
+                        <td>Add Device, Devices Listing</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Device creation with Serial ID, Name, location fields</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.3.2</td>
+                        <td>Device sensor param configurations</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No UI for configuring sensor parameters</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.3.3</td>
+                        <td>User mapping with devices</td>
+                        <td>Not directly visible</td>
+                        <td><span class="status-badge partial">Partially Implemented</span></td>
+                        <td>User permissions for device management exist but direct mapping UI not shown</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.3.4</td>
+                        <td>Geo-tagging</td>
+                        <td>Add Device</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Location fields in Add Device form (address, state, city)</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.3.5</td>
+                        <td>Health check & maintenance alerting</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No maintenance alerts visible</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.4.1</td>
+                        <td>Real time data collection & Storage</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Real-time data display of PM2.5, PM10, CO2, temperature, etc.</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.4.2</td>
+                        <td>Sensor Data processing</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Processed data shown as AQI, BI, PI, FI indexes</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.4.3</td>
+                        <td>Trend analysis</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge partial">Partially Implemented</span></td>
+                        <td>Some trend visualization in dashboard panels, but limited historical data</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.5.1</td>
+                        <td>Customizable Dashboard with Widgets</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge partial">Partially Implemented</span></td>
+                        <td>Dashboard has widgets but customization not evident</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.5.2</td>
+                        <td>Real-time & Historical Data Visualization</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge partial">Partially Implemented</span></td>
+                        <td>Real-time data shown, historical data sections exist but appear empty</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.5.3</td>
+                        <td>Graphical Insights</td>
+                        <td>Dashboard</td>
+                        <td><span class="status-badge partial">Partially Implemented</span></td>
+                        <td>Basic graphs shown for pollutants</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.5.4</td>
+                        <td>Export Data in CSV, JSON, XML, PDF Formats</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No export options visible</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P1.5.5</td>
+                        <td>Chatbot & Email support</td>
+                        <td>Visible in bottom-right corner</td>
+                        <td><span class="status-badge implemented">Implemented</span></td>
+                        <td>Chat support icon visible in all screens</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Phase 2 – B2B (Web Enhancements) Requirements</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-col">ID</th>
+                        <th class="req-col">Requirement Description</th>
+                        <th class="imp-col">UI/UX Implementation</th>
+                        <th class="status-col">Status</th>
+                        <th class="comments-col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="id-col">P2.1.1</td>
+                        <td>Automated Calibration & Firmware Updates</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No UI for calibration or firmware updates</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.1.2</td>
+                        <td>Map-based Device Tracking</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No map visualization for devices</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.1.3</td>
+                        <td>Remote Troubleshooting & Diagnostics</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No troubleshooting UI</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.1.4</td>
+                        <td>IoT Protocol Integration</td>
+                        <td>Not applicable to UI</td>
+                        <td><span class="status-badge na">N/A</span></td>
+                        <td>Backend/hardware feature</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.2.1</td>
+                        <td>Multi-location Monitoring</td>
+                        <td>Not clearly visible</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Location fields exist but no multi-location dashboard</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.2.2</td>
+                        <td>Compliance Scorecard for Certifications</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No compliance metrics</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.2.3</td>
+                        <td>Automated Email reports</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No report scheduling options</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.3.1</td>
+                        <td>Data Retention & Anonymization Features</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No data policy UI elements</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.3.2</td>
+                        <td>Regulatory Compliance Reports</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No compliance reporting options</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.4.1-4</td>
+                        <td>AI/ML & Data Analysis features</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>No AI-driven insights or predictions visible</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P2.5</td>
+                        <td>Mobile App - B2B</td>
+                        <td>Not applicable to web screens</td>
+                        <td><span class="status-badge na">N/A</span></td>
+                        <td>Mobile app not part of current screens</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Phase 3 – B2C (Mobile APP & Web Enhancements)</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-col">ID</th>
+                        <th class="req-col">Requirement Description</th>
+                        <th class="imp-col">UI/UX Implementation</th>
+                        <th class="status-col">Status</th>
+                        <th class="comments-col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="id-col">P3.1.1</td>
+                        <td>AI-based Correlation of Air Quality with Productivity & Health Metrics</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>UI for displaying correlations between air quality and health/productivity will need to be designed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.1.2</td>
+                        <td>Deep Learning-based Seasonal & Location-Based AQI Forecasting</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Forecasting visualization UI needs to be designed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.1.3</td>
+                        <td>Edge AI Processing for Real-Time Sensor Analytics</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Real-time analytics dashboard needs development</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.1.4</td>
+                        <td>AI-driven Auto Suggestions for Improving Indoor Air Quality</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>UI for displaying suggestions and recommendations needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.1.5</td>
+                        <td>Automated Decision-making for Air Purification Strategies</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Automation control UI and strategy management interfaces needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.1</td>
+                        <td>Mobile App - User Management</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Mobile app user management screens need to be designed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.2</td>
+                        <td>Mobile App - Airvue Device Setup</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Mobile onboarding flow for devices needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.3</td>
+                        <td>Mobile App - Real-time Metrics Display (PM1, PM2.5, PM10, CO2, VOCs, etc.)</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Mobile dashboard for real-time metrics needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.4</td>
+                        <td>Mobile App - Color-coded air quality status</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Visual indicators for air quality status needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.5</td>
+                        <td>Mobile App - Reports & Trends</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Mobile reports and trend visualizations needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.6</td>
+                        <td>Mobile App - Daily/weekly air quality summary</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Summary screens and notifications needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.7</td>
+                        <td>Mobile App - Home vs. outdoor air comparison</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Comparative visualization UI needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.8</td>
+                        <td>Mobile App - Historical air quality insights with personalized actions</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Historical data view with actionable insights needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.2.9</td>
+                        <td>Mobile App - Geo-tagging & Map-based Device Tracking</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Map interface for device location tracking needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P3.3</td>
+                        <td>Third party APIs and Exposing internal APIs</td>
+                        <td>Not visible in current screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>API documentation and integration interfaces if required</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Phase 4 – B2C (Mobile APP)</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-col">ID</th>
+                        <th class="req-col">Requirement Description</th>
+                        <th class="imp-col">UI/UX Implementation</th>
+                        <th class="status-col">Status</th>
+                        <th class="comments-col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="id-col">P4.1.1</td>
+                        <td>Mobile App - Quick actions to turn on air purifiers or ventilation</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Device control interface with quick action buttons needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P4.1.2</td>
+                        <td>Mobile App - Health-Centric AI Suggestions</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Health insights and recommendation UI needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P4.2</td>
+                        <td>BLDC Fan - Requirements</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Fan control interface and monitoring UI needed</td>
+                    </tr>
+                    <tr>
+                        <td class="id-col">P4.3</td>
+                        <td>Smart Lighting - Requirements</td>
+                        <td>Not applicable to current web screens</td>
+                        <td><span class="status-badge not-implemented">Not Implemented</span></td>
+                        <td>Lighting control interface and automation UI needed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary">
+            <h2>Gaps and Recommendations</h2>
+            
+            <h3>High Priority Gaps</h3>
+            <ul class="gap-list">
+                <li class="priority-high">
+                    <strong>Subscription Management:</strong> No UI for subscription plans or payment processing
+                </li>
+                <li class="priority-high">
+                    <strong>Device Configuration:</strong> Missing UI for sensor parameter configuration
+                </li>
+                <li class="priority-high">
+                    <strong>Data Export:</strong> No options for exporting data in different formats
+                </li>
+                <li class="priority-high">
+                    <strong>Historical Data Visualization:</strong> Limited implementation of historical data views
+                </li>
+            </ul>
+            
+            <h3>UI/UX Recommendations</h3>
+            <ul class="gap-list">
+                <li>Add subscription management section under user settings</li>
+                <li>Implement device configuration options in device detail view</li>
+                <li>Add export buttons to dashboard and data views</li>
+                <li>Enhance historical data visualization with filtering and comparison tools</li>
+                <li>Implement map view for device tracking</li>
+                <li>Add compliance reporting section for certification metrics</li>
+            </ul>
+            
+            <h3>Next Steps for UI/UX Development</h3>
+            <ul class="gap-list">
+                <li>Complete the Phase 1 features with missing UI elements</li>
+                <li>Design mockups for Phase 2 enhancements</li>
+                <li>Develop user flow diagrams for Mobile App requirements</li>
+                <li>Create wireframes for AI insights visualization</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Airvue UI/UX Requirements Traceability Matrix • Last Updated: April 2, 2025</p>
+        </div>
+    </div>
+</body>
+</html>
